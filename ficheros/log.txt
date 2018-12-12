@@ -1,0 +1,12 @@
+2018-12-12 20:10:05 : El empleado FRANCIS KING A ha añadido el cliente "".
+2018-12-12 20:10:33 : El empleado FRANCIS KING A ha añadido el cliente "".
+2018-12-12 20:10:47 : El empleado FRANCIS KING A ha añadido el cliente "".
+2018-12-12 20:11:50 : El empleado FRANCIS KING A ha añadido el cliente "Hola".
+2018-12-12 20:12:10 : El empleado FRANCIS KING A ha añadido el cliente "1".
+2018-12-12 20:14:31 : El empleado FRANCIS KING A ha añadido el cliente "a".
+2018-12-12 20:20:46 : El empleado FRANCIS KING A ha borrado el cliente "".
+2018-12-12 20:20:49 : El empleado FRANCIS KING A ha borrado el cliente "".
+2018-12-12 20:20:51 : El empleado FRANCIS KING A ha borrado el cliente "".
+2018-12-12 20:20:53 : El empleado FRANCIS KING A ha borrado el cliente "1".
+2018-12-12 20:20:59 : El empleado FRANCIS KING A ha borrado el cliente "a".
+2018-12-12 20:21:03 : El empleado FRANCIS KING A ha borrado el cliente "Hola".
