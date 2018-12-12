@@ -48,8 +48,9 @@
 <body>
 <?php
 
-    WebController::login();
-    
+    //Creamos el login con el metodo crearLogin de la clase WebController
+    WebController::crearLogin();
+
 ?>
 </body>
 </html>

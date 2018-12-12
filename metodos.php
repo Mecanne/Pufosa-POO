@@ -1,10 +1,22 @@
 <?php
 
- function conectar($database)
- {
-     $conexion = mysqli_connect("localhost","root","",$database);
-     return $conexion;
- }
+function conectar($base){
+    $conexion = mysqli_connect("localhost","root","",$base) or
+        die("Problemas de conexión");
+    return $conexion;
+}
+
+/**
+ * Escribe un mensaje en el archivo especificao en la ruta.
+ * @param String $ruta Ruta del archivo a escribir
+ * param {Mensaje a escribir en la ruta} $mensaje
+*/
+function escribirEn($ruta,$mensaje){
+    $fichero = fopen($ruta,"a");
+    fputs($fichero,date("Y-m-d H:i:s")." : ".$mensaje);
+    fputs($fichero,"\n");
+    fclose($fichero);
+}
 
  /**
   * Consulta que define a la tabla base.
@@ -55,42 +67,6 @@
     }
  }
 
- function crearLogin()
- {
-     // Creamos el contenedor de toda la pagina excepto el menu y le asignamos la clase 'container-fluid' para que haga efecto BOOTSTRAP (Version 3)
-    $contenedor = new Caja();
-    $contenedor->añadirAtributo("class","container-fluid");
-    $contenedorFormulario = new Caja();
-    $contenedorFormulario->añadirAtributo("class","container-fluid login-container");
-
-    
-    // Creamos el formulario que recogerá el id del empleado.
-    $formulario = new Formulario("post","access.php");
-    $formulario->añadirAtributo("class","form");
-    $formulario->añadirAtributo("style","width:400px;padding:40px;");
-
-    //Creamos los campos del formulario
-    $inputID = new Input("text","","emp_id");
-    $inputID->añadirAtributo("class","form-control");
-
-    $submitInput = new Input("submit","","","Acceder");
-    $submitInput->añadirAtributo("class","btn btn-primary form-control");
-    //Añadimos los campos al formulario
-    $formulario->añadirCampo("ID del empleado",$inputID);
-    $formulario->añadirCampo("",$submitInput);
-
-    //Creamos le objeto Imagen que ocntendrá la imagen del logo de la empresa.
-    $imgLogo = new Imagen("img/logo.png","Logo de la empresa");
-
-    //Añadimos la imagen al contenedor secudario.
-    $contenedorFormulario->añadirContenido($imgLogo);
-    //Añadimos el formulario.
-    $contenedorFormulario->añadirContenido($formulario);
-
-    //Añadimos el contenedor secundario al principal.
-    $contenedor->añadirContenido($contenedorFormulario);
-
-    echo $contenedor;
- }
+ 
  
 ?>

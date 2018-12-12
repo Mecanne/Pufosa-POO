@@ -26,6 +26,10 @@
         *{
             box-sizing:border-box;
         }
+
+        form{
+            margin: 0px 10px 0px 0px;
+        }
     </style>
 </head>
 <body>
@@ -35,51 +39,52 @@
     $contenedor = new Caja();
     $contenedor->añadirAtributo("class","container-fluid");
 
-    //Creamos el menu.
-    $menu = new Menu();
-    //Añadimos las clases.
-    $menu->añadirAtributo("class","navbar navbar-inverse");
-    $menu->añadirAtributo("style","border-radius: 0px;");
+    //Creamos el boton que mostrará el cuestionario para añadir un cliente.
+    $botonAñadir = new Boton("Añadir cliente");
+    $botonAñadir->añadirAtributo("class","btn btn-info btn-block");
+    $botonAñadir->añadirAtributo("data-toggle","modal");
+    $botonAñadir->añadirAtributo("data-target","#añadir");
 
-    //Creamos el contenedor para dentro del menu.
-    $contenedorMenu = new Caja();
-    //Le añadimos las clases
-    $contenedorMenu->añadirAtributo("class","container-fluid");
+    //Creamos el contenedor del boton
+    $contenedorBoton = new Caja($botonAñadir);
+    $contenedorBoton->añadirAtributo("class","container");
 
-    //Creamos el contenedor para la cabecera del menu
-    $cabeceraMenu = new Caja();
-    //Le añadimos las clases
-    $cabeceraMenu->añadirAtributo("class","navbar-header");
+    //Creamos el input para poder buscar en la tabla
+    $buscador = new Input("text","myInput","","");
+    $buscador->añadirAtributo("class","form-control");
+    $buscador->añadirAtributo("placeholder","Buscar...");
 
-    $textoCabecera = new ElementoHTML("p","PUFO S.A.");
-    $textoCabecera->añadirAtributo("class","navbar-text");
-    $textoCabecera->añadirAtributo("style","font-weight:bold;color:white;");
-    $cabeceraMenu->añadirContenido($textoCabecera);
-    //Creamos la lista para las opciones del menu sobre las tablas
-    $listaTablas = new Lista();
-    $listaTablas->añadirAtributo("class","nav navbar-nav");
-    $enlaceClientes = new Enlace("Clientes","");
-    $enlaceClientes->añadirAtributo("class","active");
-    $listaTablas->añadirElemento($enlaceClientes);
+    //Creamos le contendor del input para buscar
+    $contenedorBuscar = new Caja();
+    $contenedorBuscar->añadirAtributo("class","container");
 
-    //Creamos la lista para las otras opciones del menu
-    $listaOpciones = new Lista();
-    $listaOpciones->añadirAtributo("class","nav navbar-nav navbar-right");
-    $listaOpciones->añadirElemento(new Enlace("Cerrar sesion","../operaciones/logout.php"));
+    //Añadimos el buscador a su respectiva caja
+    $contenedorBuscar->añadirContenido($buscador);
 
-    $contenedorMenu->añadirContenido($cabeceraMenu);
-    $contenedorMenu->añadirContenido($listaTablas);
-    $contenedorMenu->añadirContenido($listaOpciones);
-
-    $menu->añadirContenido($contenedorMenu);
-
+    //Añadimos el boton y la tabla de clientes al contenedor principal.
+    $contenedor->añadirContenido($contenedorBoton);
+    $contenedor->añadirContenido("<hr>");
+    $contenedor->añadirContenido($contenedorBuscar);
+    $contenedor->añadirContenido("<hr>");
     $contenedor->añadirContenido(Cliente::crearTabla());
 
-    echo $menu;
+    //Imprimimos el menu y el contenedor    
+    echo WebController::imprimirMenu();
+    echo Cliente::añadirModal();
     echo $contenedor;
     
 
     mysqli_close($conexion);
 ?>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+                $("#tablaDatos tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script> 
 </body>
 </html>
